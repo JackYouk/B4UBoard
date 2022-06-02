@@ -1,15 +1,25 @@
-let countryRiskLevel = '';
+// JS file for fetching api data
+// to use: create a function that will be called in our UI (user interface) js file
+
+
+
+
 
 // risk assesment
-fetch('https://www.travel-advisory.info/api')
-.then(function (response) {
-    return response.json();
-})
-.then(function (data){
-    console.log(data);
-    countryRiskLevel = data.data.AD.advisory.score;
-    console.log(countryRiskLevel);
-})
+function riskData(){
+    let countryRiskLevel = '';
+    fetch('https://www.travel-advisory.info/api')
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data){
+        console.log(data);
+        countryRiskLevel = data.data.AD.advisory.score;
+        console.log(countryRiskLevel);
+        return data;
+    })
+}
+
 
 // COVID-19 travel restrictions, border control measures, and quarantine requirements.
 // fetch('https://requirements-api.sandbox.joinsherpa.com/v2/entry-requirements?citizenship=CA&destination=VN&key={API KEY}')
@@ -20,14 +30,18 @@ fetch('https://www.travel-advisory.info/api')
 //         console.log(data);
 //     })
 
-// rest api
-fetch('https://restcountries.com/v3.1/all')
+
+// rest api - general info
+function generalInfoData(){
+    fetch('https://restcountries.com/v3.1/all')
     .then(function (response) {
         return response.json();
     })
     .then(function (data){
         console.log(data);
+        return data;
     })
+}
 
 // currency exchange api
 // let currency = 'EUR'
