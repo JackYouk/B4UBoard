@@ -53,3 +53,10 @@ function generalInfoData(){
 //     .then(function (data){
 //         console.log(data);
 //     })
+
+var map = L.map('map').setView([37.76283, -122.4275], 7);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+L.marker([37.76283, -122.4275]).addTo(map);
