@@ -14,9 +14,14 @@ h3 {
     margin-bottom: 20px;
 }
 
+.container-md{
+    width: 75%;
+    margin-bottom: 75px;
+}
+
 .col-md-6 img {
-    width:500px;
-    height: 300px;
+    width:400px;
+    height: 250px;
     margin-bottom: 50px;
     margin-top: 50px;
 }
