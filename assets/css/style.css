@@ -25,3 +25,8 @@ h3 {
     margin-bottom: 50px;
     margin-top: 50px;
 }
+
+#map { 
+    height: 180px; 
+    width: 500px;
+}
