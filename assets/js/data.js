@@ -33,9 +33,9 @@ function genBorders(country) {
 
 
 // rest api - general info
-let countryLat = '';
-let countryLon = '';
-let zoomLevel = 4;
+let countryLat = 0;
+let countryLon = 0;
+let zoomLevel = 1;
 function generalInfoData(country){
     fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then(function (response) {
@@ -46,7 +46,7 @@ function generalInfoData(country){
         countryLat = data[0].latlng[0];
         countryLon = data[0].latlng[1];
         let area = data[0].area;
-        if(area < 250000){
+        if(area < 99000){
             zoomLevel = 6;
         }else if(area < 500000){
             zoomLevel = 5;
@@ -63,7 +63,7 @@ function generalInfoData(country){
         getRiskData(data[0].cca2);
     })
 }
-generalInfoData('Mexico')
+generalInfoData('Brazil')
 
 
 function parseCountryInfo(country_data) {
