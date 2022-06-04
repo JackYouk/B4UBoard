@@ -4,3 +4,12 @@
 //const root = $('#root');
 const root = $('#root');
 
+function fetchData() {
+    fetch("https://www.travel-advisory.info/api").then(response => {
+        console.log(response);
+    });
+}
+
+console.log(fetch);
+
+
