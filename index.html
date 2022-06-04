@@ -4,16 +4,68 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-   crossorigin=""/>
-   <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Document</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css"
+      rel="stylesheet"
+    />
+     <!-- Leaflet -->
+    <link 
+        rel="stylesheet" 
+        href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin=""
+    />
+    <!-- Our CSS -->
+    <link 
+        rel="stylesheet" 
+        href="./assets/css/style.css" 
+    />
+  
+    <title>B4UBoard</title>
 </head>
+
 <body>
     
-    <div id="root"></div>
 
+
+</head>
+<body>
+    <div id="root"></div>
+    <div id="map"></div>
+
+<!-- NAVBAR -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">B4UBoard</a>
+      <form class="d-flex input-group w-auto">
+        <input
+          type="search"
+          class="form-control rounded"
+          placeholder="Search destination"
+          aria-label="Search"
+          aria-describedby="search-addon"
+        />
+        <span class="input-group-text border-0" id="search-addon">
+          <i class="fas fa-search"></i>
+        </span>
+      </form>
+    </div>
+  </nav>
+
+
+
+<<<<<<< HEAD
     <div id="map"></div>
 
     
@@ -23,5 +75,30 @@
    crossorigin=""></script>
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/ui.js"></script>
+=======
+    <!-- jQuery -->
+    <script 
+        src="https://code.jquery.com/jquery-1.12.4.js">
+    </script>
+    <!--   MD Bootstrap   -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.js">
+    </script>
+    <!-- Leaflet -->
+    <script 
+        src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin="">
+    </script>
+    <!-- Data -->
+    <script 
+        src="./assets/js/data.js">
+    </script>
+    <!-- UI -->
+    <script 
+        src="./assets/js/ui.js">
+    </script>
+>>>>>>> 3f344edc12ae5f31021ab4df04fd40335140bb15
 </body>
 </html>
