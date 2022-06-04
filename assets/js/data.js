@@ -58,11 +58,33 @@ function generalInfoData(country){
         // zoom = area / keyNum;
         // zoom = Math.round(zoom);
         // console.log(zoom);
-        genMap(countryLat, countryLon, 4);
+        genMap(countryLat, countryLon, Math.floor(8000000/area));
     })
 }
-generalInfoData('Canada')
+generalInfoData('France');
+applyCountryBorder(map, 'france');
 
+function applyCountryBorder(map, countryname) {
+    
+    fetch(`https://nominatim.openstreetmap.org/search?country=
+      ${countryname}&polygon_geojson=1&format=json&limit=1`)
+      .then(function(response) {
+          return response.json()
+      }).then(function(data) {
+          console.log(data);
+        L.geoJSON(data[0].geojson, {
+          color: "green",
+          weight: 3,
+          opacity: 0.6,
+          fillOpacity: 0.0 
+        }).addTo(map);
+
+        map.fitBounds([
+            [data[0].boundingbox[0], data[0].boundingbox[2]],
+            [data[0].boundingbox[1], data[0].boundingbox[3]]
+        ]);
+      });
+  }
 
 // currency exchange api
 // let currency = 'EUR'
