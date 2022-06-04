@@ -1,6 +1,7 @@
 // JS file for fetching api data
 // to use: create a function that will be called in our UI (user interface) js file
 
+var countryInfo = {}
 
 let map = L.map('map');
 function genMap(lat, lon, zoom){
@@ -58,10 +59,23 @@ function generalInfoData(country){
         }
         genBorders(country);
         genMap(countryLat, countryLon, zoomLevel);
+        parseCountryInfo(data[0]);
+        getRiskData(data[0].cca2);
     })
 }
 generalInfoData('Mexico')
 
+
+function parseCountryInfo(country_data) {
+    countryInfo['flag'] = country_data.flags.png;
+    countryInfo['coat_of_arms'] = country_data.coatOfArms.png;
+    countryInfo['currencies'] = country_data.currencies;
+    countryInfo['languages'] = country_data.languages;
+    countryInfo['capital'] = country_data.capital[0];
+    countryInfo['population'] = country_data.population;
+    countryInfo['continents'] = country_data.continents;
+    countryInfo['area'] = country_data.area;
+}
 
 // let map = L.map('map');
 
@@ -81,21 +95,22 @@ generalInfoData('Mexico')
 // }
 // generalInfoData('France')
 
+// risk assesment
+function getRiskData(country_code){
+    let countryRiskLevel = '';
+    fetch(`https://www.travel-advisory.info/api?countrycode=${country_code}`)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data){
+        countryInfo['risk_score'] = data.data[country_code].advisory.score;
+        displayCountryInfo(countryInfo);
+    })
+}
 
-// // risk assesment
-// function riskData(){
-//     let countryRiskLevel = '';
-//     fetch('https://www.travel-advisory.info/api')
-//     .then(function (response) {
-//         return response.json();
-//     })
-//     .then(function (data){
-//         console.log(data);
-//         countryRiskLevel = data.data.AD.advisory.score;
-//         console.log(countryRiskLevel);
-//         return data;
-//     })
-// }
+function displayCountryInfo(countryInfo) {
+    
+}
 
 // riskData();
 
