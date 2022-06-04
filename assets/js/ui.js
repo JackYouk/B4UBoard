@@ -4,6 +4,7 @@
 //const root = $('#root');
 const root = $('#root');
 
+
 // Logo Header ------------------------------------------------------------------------------------------
 let logoHeader = $('<header class="row">');
 let imgContainer = $('<div class="col-md-12">');
@@ -63,10 +64,6 @@ function genCountryContent(country){
 }
 
         
-        
-
-
-
-
+    
 
 
