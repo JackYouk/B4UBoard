@@ -119,12 +119,12 @@ root.append(inputContainer);
 
 // generates landing page content (big map)
 function genLandingContent(){
-    let landingContainer = $('<div class="row">');
+    let landingContainer = $('<div class="row d-flex justify-content-center">');
         let landingMap = $('<div class="col-12 d-flex justify-content-center m-5"id="map">')
             .css({"height":"500px","width":"1200px"});
         landingContainer.append(landingMap);
     root.append(landingContainer);
-    
+
     genMap(0, 0, 1);  
 }
 
