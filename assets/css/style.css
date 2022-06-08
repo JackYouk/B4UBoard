@@ -29,4 +29,31 @@ h3 {
 #map { 
     height: 500px; 
     width: 900px;
+    z-index: -1;
+}
+
+.force-scroll {
+    overflow-y: scroll; 
+    height: 200px;
+}
+
+.ui-menu {
+    overflow-y: scroll; 
+    height: auto;
+    max-height: 200px;
+    padding-left: .5rem;
+    width: max-content;
+    list-style-type: none;
+    background-color: white;
+
+}
+
+.ui-menu-item:hover {
+    background-color: var(--mdb-blue);
+    color: white;
+    padding: 0;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
 }
