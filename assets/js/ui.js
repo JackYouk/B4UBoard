@@ -84,11 +84,7 @@ function getRiskData(country_code){
         displayCountryInfo(countryInfo);
     })
 }
-
-
-
-
-
+    
 
 // UI ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -164,6 +160,48 @@ function genCountryContent(country){
 
 // run it
 genLandingContent();
-    
-     
 
+
+
+function getBGImg(city){
+    var url = "https://en.wikipedia.org/w/api.php";     
+    var params = {
+        action: "query",
+        prop: "pageimages",
+        titles: city,
+        format: "json",
+        piprop: "original"
+    };
+    
+    url = url + "?origin=*";
+    Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+    
+    return fetch(url)
+        .then(function(response){return response.json();})  // conversion to json/dict  
+        .then(function(response) {
+            // console.log("yes");
+            console.log(response, "resp");
+            var pages = response.query.pages;
+            
+            for (var page in pages) {         
+                console.log("1",pages[page].original.source );    
+                return pages[page].original.source;  
+            }       
+        })
+}
+    
+    function displayBackground(imgSRC) {
+    
+        let bgHeader = $('<header class="row">');
+        let bgContainer = $('<div class="col-md-12">');
+            let bgImg = $(`<img src=${imgSRC} ID="bgImg"  alt="Capital city"/>`)
+                .css('width', '400px');
+                bgContainer.append(bgImg);
+        bgHeader.append(bgContainer);
+        root.append(bgHeader);        
+    }
+
+getBGImg("Delhi").then(srcImg => {
+    console.log(srcImg, "yes 1");
+    displayBackground (srcImg);
+});
