@@ -29,6 +29,16 @@ h3 {
 #map { 
     height: 500px; 
     width: 900px;
+
+}
+
+td {
+    width: 150px;
+    height: 50px;
+}
+
+img {
+    height: 50px;
     z-index: -1;
 }
 

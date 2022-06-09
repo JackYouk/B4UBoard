@@ -2,9 +2,9 @@
 
 // Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+let map;
+var countryInfo = {};
 function genMap(lat, lon, zoom){
-    let map = L.map('map');
     map.setView([lat, lon], 7);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: zoom,
@@ -427,9 +427,9 @@ dropdownMenuUl.on('click', 'li', function(){
 function genLandingContent(){
         let landingMap = $('<div class="col-12 d-flex justify-content-center m-5" id="map">')
             .css({"height":"500px","width":"1200px"});
-        contentContainer.append(landingMap);
+    map = L.map('map');
+    contentContainer.append(landingMap);
     root.append(contentContainer);
-
     genMap(0, 0, 1);  
 }
 
@@ -444,5 +444,129 @@ function genCountryContent(country){
 genLandingContent();
     
 
+function displayCountryInfo(countryInfo) {
+    var infoContainer = $('<section>');
+    infoContainer.appendTo($('#root'));
+
+    var infoTable = $('<table>');
+    infoTable.appendTo(infoContainer);
+
+    // countryInfo['flag'] = country_data.flags.png;
+    var flagRow = $('<tr>');
+    flagRow.appendTo(infoTable);
+    var flagTitle = $('<td>');
+    flagTitle.text('Country Flag: ');
+    flagTitle.appendTo(flagRow);
+    var flagImageCol = $('<td>');
+    flagImageCol.appendTo(flagRow);
+    var flagImage = $('<img>');
+    flagImage.attr('src', countryInfo['flag']);
+    flagImage.appendTo(flagImageCol);
 
 
+    // countryInfo['coat_of_arms'] = country_data.coatOfArms.png;
+    var coatOfAarmsRow = $('<tr>');
+    coatOfAarmsRow.appendTo(infoTable);
+    var coatOfAarmsTitle = $('<td>');
+    coatOfAarmsTitle.text('Coat Of Arms: ');
+    coatOfAarmsTitle.appendTo(coatOfAarmsRow);
+    var coatOfArmsImageCol = $('<td>');
+    coatOfArmsImageCol.appendTo(coatOfAarmsRow);
+    var coatOfAarmsImage = $('<img>');
+    coatOfAarmsImage.attr('src' , countryInfo['coat_of_arms']);
+    coatOfAarmsImage.appendTo(coatOfArmsImageCol);
+    
+    // countryInfo['currencies'] = country_data.currencies;
+    var currenciesRow = $('<tr>');
+    currenciesRow.appendTo(infoTable);
+    var currenciesTitle = $('<td>');
+    currenciesTitle.text('Currencies: ');
+    currenciesTitle.appendTo(currenciesRow);
+    var currenciesValue = $('<td>');
+    currenciesValue.appendTo(currenciesRow);
+    var currencyString = '';
+    for (const key in countryInfo['currencies']) {
+        if(currencyString !== '') {
+            currencyString += ', '
+        }
+        currencyString += countryInfo['currencies'][key]['name'];
+    }
+    currenciesValue.text(currencyString);
+
+    // countryInfo['languages'] = country_data.languages;
+    var languagesRow = $('<tr>');
+    languagesRow.appendTo(infoTable);
+    var languagesTitle = $('<td>');
+    languagesTitle.text('Languages: ');
+    languagesTitle.appendTo(languagesRow);
+    var languagesValue = $('<td>');
+    languagesValue.appendTo(languagesRow);
+    var languageString = '';
+    for (const key in countryInfo['languages']) {
+        if(languageString !== '') {
+            languageString += ', '
+        }
+        languageString += countryInfo['languages'][key];
+    }
+    languagesValue.text(languageString);
+
+    // countryInfo['capital'] = country_data.capital[0];
+
+    var capitalRow = $('<tr>');
+    capitalRow.appendTo(infoTable);
+    var capitalTitle = $('<td>');
+    capitalTitle.text('Capital: ');
+    capitalTitle.appendTo(capitalRow);
+    var capitalValue = $('<td>');
+    capitalValue.appendTo(capitalRow);
+    capitalValue.text(countryInfo['capital']);
+
+    // countryInfo['population'] = country_data.population;
+    var populationRow = $('<tr>');
+    populationRow.appendTo(infoTable);
+    var populationTitle = $('<td>');
+    populationTitle.text('Capital: ');
+    populationTitle.appendTo(populationRow);
+    var populationValue = $('<td>');
+    populationValue.appendTo(populationRow);
+    populationValue.text(countryInfo['population']);
+
+    // countryInfo['continents'] = country_data.continents;
+    var continentsRow = $('<tr>');
+    continentsRow.appendTo(infoTable);
+    var continentTitle = $('<td>');
+    continentTitle.text('Continents: ');
+    continentTitle.appendTo(continentsRow);
+    var continentValue = $('<td>');
+    continentValue.appendTo(continentsRow);
+    var continentString = '';
+    for (const continent of countryInfo['continents']) {
+        if(continentString !== '') {
+            continentString += ', '
+        }
+        continentString += continent;
+    }
+    continentValue.text(continentString);
+
+    // countryInfo['area'] = country_data.area;
+    var areaRow = $('<tr>');
+    areaRow.appendTo(infoTable);
+    var areaTitle = $('<td>');
+    areaTitle.text('Area: ');
+    areaTitle.appendTo(areaRow);
+    var areaValue = $('<td>');
+    areaValue.appendTo(areaRow);
+    areaValue.text(countryInfo['area']);
+
+    //countryInfo['risk_score'] = data.data[country_code].advisory.score;
+    var riskRow = $('<tr>');
+    riskRow.appendTo(infoTable);
+    var riskTitle = $('<td>');
+    riskTitle.text('Risk Score: ');
+    riskTitle.appendTo(riskRow);
+    var riskValue = $('<td>');
+    riskValue.appendTo(riskRow);
+    riskValue.text(countryInfo['risk_score']);
+}
+
+generalInfoData('Mexico');
