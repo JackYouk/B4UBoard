@@ -1,7 +1,8 @@
 // use this js file to create our user interface- append elements to the root function in order to display to the page
 
 // Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+var countryInfo = {};
+let map;
 
 function genMap(lat, lon, zoom){
     let map = L.map('map');
@@ -34,8 +35,8 @@ let countryLat = 0;
 let countryLon = 0;
 let zoomLevel = 1;
 function generalInfoData(country){
-    fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(function (response) {
+    return fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(function (response) {        
         return response.json();
     })
     .then(function (data){
@@ -54,10 +55,11 @@ function generalInfoData(country){
         }else{
             zoomLevel = 2;
         }
-        genBorders(country);
-        genMap(countryLat, countryLon, zoomLevel);
+        genBorders(country);      
+        // genMap(countryLat, countryLon, zoomLevel);
         parseCountryInfo(data[0]);
-        getRiskData(data[0].cca2);
+        // getRiskData(data[0].cca2);        
+        return data[0].capital[0];
     })
 }
 
@@ -110,7 +112,7 @@ let inputContainer = $('<div class="row">');
         let dropdownBtn = $('<button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-mdb-toggle="dropdown" aria-expanded="false">')
             .text('Select a Country');
         // add all countries to this array ---> List is here: https://gist.github.com/incredimike/1469814
-        let countryList = ['US', 'Brazil', 'Etc'];
+        let countryList = ['United States of America', 'Brazil', 'Australia', 'Mexico', 'Republic of India'];
         let dropdownMenuUl = $('<ul class="dropdown-menu">')
             // for loop to create list items (all countries)
             for(let i = 0; i < countryList.length; i++){
@@ -190,18 +192,43 @@ function getBGImg(city){
         })
 }
     
-    function displayBackground(imgSRC) {
-    
-        let bgHeader = $('<header class="row">');
-        let bgContainer = $('<div class="col-md-12">');
-            let bgImg = $(`<img src=${imgSRC} ID="bgImg"  alt="Capital city"/>`)
-                .css('width', '400px');
-                bgContainer.append(bgImg);
-        bgHeader.append(bgContainer);
-        root.append(bgHeader);        
-    }
+function displayBackground(imgSRC) {
 
-getBGImg("Delhi").then(srcImg => {
-    console.log(srcImg, "yes 1");
-    displayBackground (srcImg);
-});
+    let bgHeader = $('<div class="row ">');
+    let bgContainer = $('<div class="col-md-12 d-flex justify-content-center mt-5">').css({'background-image':`url(${imgSRC})`,'background-size':'cover','width': '1200px','height': '500px','padding':'0'});
+    
+    let textContainer = $('<div class="col-md-12 d-flex justify-content-center">').css({'background-color':'rgba(0,0,0,0.4)', 'width': '100%','height': '100%'});
+   
+    displayDummyData(textContainer);
+
+    bgContainer.append(textContainer);
+    bgHeader.append(bgContainer);
+    root.append(bgHeader);        
+}
+
+
+
+dropdownMenuUl.on('click', 'li', function(){
+    let currentCountry = $(this).text();
+    console.log(currentCountry, "000");
+    generalInfoData(currentCountry).then(capital => {
+        console.log(capital, "capital");
+        getBGImg(capital).then(srcImg => {
+            console.log(srcImg, "yes 1");
+            displayBackground (srcImg);
+        });
+    });
+})
+
+function displayDummyData(textContainer) {
+    var infoContainer = $('<section>');
+    infoContainer.appendTo($(textContainer));
+
+    var content = "<table id='dummy-table'>"
+    for(i=0; i<5; i++){
+        content += '<tr><td>' + 'Capital' + '</td><td>'+ countryInfo['capital'] + '</td></tr>';
+    }
+    content += "</table>"
+
+    infoContainer.append(content);
+}
