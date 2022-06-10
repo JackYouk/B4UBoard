@@ -18,7 +18,7 @@
 let map;
 var countryInfo = {};
 function genMap(lat, lon, zoom){
-    
+    console.log('Map');
     map.setView([lat, lon], 7);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: zoom,
@@ -53,7 +53,7 @@ function generalInfoData(country){
         return response.json();
     })
     .then(function (data){
-        console.log(data);
+        console.log('genInfoData');
         countryLat = data[0].latlng[0];
         countryLon = data[0].latlng[1];
         let area = data[0].area;
@@ -445,6 +445,50 @@ function emptyContent(){
     contentContainer.empty();
 }
 
+
+
+// generates landing page content (big map)
+function genLandingContent(){
+    let landingMap = $('<div class="col-12 d-flex justify-content-center m-5" id="map">')
+        .css({"height":"500px","width":"1200px"});
+    contentContainer.append(landingMap);
+    root.append(contentContainer);
+    map = L.map('map');
+    genMap(0, 0, 1);  
+
+
+    // event listeners
+    $('.searchButton').on('click', function(){
+        // emptyContent();
+        let currentCountry = $('.searchInput').val();
+        console.log(currentCountry);
+        genCountryContent(currentCountry);
+    })
+    
+    dropdownMenuUl.on('click', 'li', function(){
+        // emptyContent();
+        let currentCountry = $(this).text();
+        console.log(currentCountry);
+        genCountryContent(currentCountry);
+    })
+}
+
+
+// generates country content (with smaller map, flag, and facts)
+function genCountryContent(currentCountry){ 
+    const countryInfoContainer = $('<div class="row">');
+    generalInfoData(currentCountry).then(capital => {
+        console.log(capital, "capital");
+        getBGImg(capital).then(srcImg => {
+            console.log(srcImg, "yes 1");
+            displayBackground (srcImg, countryInfoContainer);
+        });
+    });
+}
+
+// run it -------------------------------------------
+genLandingContent();
+
 // Event listeners ------------------------------------------------------------------------------
 $('.searchButton').on('click', function(){
     // emptyContent();
@@ -459,42 +503,6 @@ dropdownMenuUl.on('click', 'li', function(){
     console.log(currentCountry);
     genCountryContent(currentCountry);
 })
-
-// generates landing page content (big map)
-function genLandingContent(){
-    let landingMap = $('<div class="col-12 d-flex justify-content-center m-5" id="map">')
-        .css({"height":"500px","width":"1200px"});
-    contentContainer.append(landingMap);
-    root.append(contentContainer);
-    map = L.map('map');
-    genMap(0, 0, 1);  
-}
-
-
-// generates country content (with smaller map, flag, and facts)
-function genCountryContent(currentCountry){
-    const countryInfoContainer = $('<div class="row">');
-    generalInfoData(currentCountry).then(capital => {
-        console.log(capital, "capital");
-        getBGImg(capital).then(srcImg => {
-            console.log(srcImg, "yes 1");
-            displayBackground (srcImg, countryInfoContainer);
-        });
-    });
-
-    
-    // let contentMap = $('<div class="col-12 d-flex justify-content-center m-5" id="map">')
-    //         .css({"height":"500px","width":"1200px"});
-    // contentContainer.append(contentMap);
-    // root.append(contentContainer);
-    // map = L.map('map');
-    
-    // generalInfoData(currentCountry);
-}
-
-// run it -------------------------------------------
-genLandingContent();
-
     
 function displayBackground(imgSRC, countryInfoContainer) {
     let bgContainer = $('<div class="col-md-12 d-flex justify-content-center mt-5">').css({'background-image':`url(${imgSRC})`,'background-size':'cover','width': '1200px','height': '500px','padding':'0'});
