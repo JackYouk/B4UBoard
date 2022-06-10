@@ -29,6 +29,7 @@ h3 {
 #map { 
     height: 500px; 
     width: 900px;
+<<<<<<< HEAD
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -38,4 +39,63 @@ h3 {
 
     };
 
+=======
+    z-index: -1;
+}
+
+#dummy-table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+    border: 2px solid;
+    width: 80%; 
+    margin: 10%;
+    color: white;
+    font-weight: bolder;
+}
+
+#dummy-table td { 
+    width: 100%;
+    padding: 10px;
+    font-size: 1.3rem;
+
+}
+
+td {
+    width: 150px;
+    height: 50px;
+}
+
+/* img {
+    height: 50px;
+    z-index: -1;
+} */
+
+.force-scroll {
+    overflow-y: scroll; 
+    height: 200px;
+}
+
+.ui-menu {
+    overflow-y: scroll; 
+    height: auto;
+    max-height: 200px;
+    padding-left: .5rem;
+    width: max-content;
+    list-style-type: none;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+
+.ui-menu-item:hover {
+    background-color: var(--mdb-blue);
+    color: white;
+    padding: 0;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+>>>>>>> f6a2ecc773e6b81d9c98f31b5c8ff4474e0f10c1
 }
