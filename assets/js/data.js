@@ -77,23 +77,7 @@ function parseCountryInfo(country_data) {
     countryInfo['area'] = country_data.area;
 }
 
-// let map = L.map('map');
 
-
-
-
-// // rest country api - general info
-// function generalInfoData(country){
-//     fetch(`https://restcountries.com/v3.1/name/${country}`)
-//     .then(function (response) {
-//         return response.json();
-//     })
-//     .then(function (data){
-//         console.log(data);
-//         genMap(map, country);
-//     })
-// }
-// generalInfoData('France')
 
 // risk assesment
 function getRiskData(country_code){
@@ -108,19 +92,49 @@ function getRiskData(country_code){
     })
 }
 
+
 function displayCountryInfo(countryInfo) {
     
 }
 
+
+
 // riskData();
 
-// // currency exchange api
-// // let currency = 'EUR'
-// // let amount = '1'
-// // fetch(`https://api.apilayer.com/exchangerates_data/convert?to=USD&from=${currency}&amount=${amount}&key=wB1ot2onRwSLoura6mVFtXMaSHrE9n3P`)
-// //     .then(function (response) {
-// //         return response.json();
-// //     })
-// //     .then(function (data){
-// //         console.log(data);
-// //     })
+// currency exchange api
+// let currency = 'EUR'
+// let amount = '1'
+// fetch(`https://api.apilayer.com/exchangerates_data/convert?to=USD&from=${currency}&amount=${amount}&key=wB1ot2onRwSLoura6mVFtXMaSHrE9n3P`)
+//     .then(function (response) {
+//         return response.json();
+//     })
+//     .then(function (data){
+//         console.log(data);
+//     })
+// console.log(country_data.capital[0]);
+// console.log("yes");
+
+var url = "https://en.wikipedia.org/w/api.php"; 
+
+var params = {
+    action: "query",
+    prop: "pageimages",
+    titles: "paris",
+    format: "json",
+};
+
+url = url + "?origin=*";
+Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+
+fetch(url)
+    .then(function(response){return response.json();})    
+    .then(function(response) {
+        // console.log("yes");
+        console.log(response);
+        var pages = response.query.pages;
+        
+        for (var page in pages) {         
+            console.log(pages[page].pageimage);            
+        }
+    })
+    .catch(function(error){console.log(error);});
