@@ -34,8 +34,8 @@ let countryLat = 0;
 let countryLon = 0;
 let zoomLevel = 1;
 function generalInfoData(country){
-    fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(function (response) {
+    return fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(function (response) {        
         return response.json();
     })
     .then(function (data){
@@ -54,10 +54,11 @@ function generalInfoData(country){
         }else{
             zoomLevel = 2;
         }
-        genBorders(country);
-        genMap(countryLat, countryLon, zoomLevel);
+        genBorders(country);      
+        // genMap(countryLat, countryLon, zoomLevel);
         parseCountryInfo(data[0]);
         getRiskData(data[0].cca2);
+        return data[0].capital[0];
     })
 }
 
@@ -84,11 +85,7 @@ function getRiskData(country_code){
         displayCountryInfo(countryInfo);
     })
 }
-
-
-
-
-
+    
 
 // UI ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -421,7 +418,6 @@ dropdownMenuUl.on('click', 'li', function(){
     console.log(currentCountry);
     genCountryContent(currentCountry);
 })
-     
 
 // generates landing page content (big map)
 function genLandingContent(){
@@ -435,13 +431,73 @@ function genLandingContent(){
 
 
 // generates country content (with smaller map, flag, and facts)
-function genCountryContent(country){
+function genCountryContent(currentCountry){
     const countryInfoContainer = $('<div class="row">');
-    root.append(countryInfoContainer);
+    generalInfoData(currentCountry).then(capital => {
+        console.log(capital, "capital");
+        getBGImg(capital).then(srcImg => {
+            console.log(srcImg, "yes 1");
+            displayBackground (srcImg, countryInfoContainer);
+        });
+    });
 }
 
 // run it -------------------------------------------
 genLandingContent();
+
+function getBGImg(city){
+    var url = "https://en.wikipedia.org/w/api.php";     
+    var params = {
+        action: "query",
+        prop: "pageimages",
+        titles: city,
+        format: "json",
+        piprop: "original"
+    };
+    
+    url = url + "?origin=*";
+    Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+    
+    return fetch(url)
+        .then(function(response){return response.json();})  // conversion to json/dict  
+        .then(function(response) {
+            // console.log("yes");
+            console.log(response, "resp");
+            var pages = response.query.pages;
+            
+            for (var page in pages) {         
+                console.log("1",pages[page].original.source );    
+                return pages[page].original.source;  
+            }       
+        })
+}
+    
+function displayBackground(imgSRC, countryInfoContainer) {
+    let bgContainer = $('<div class="col-md-12 d-flex justify-content-center mt-5">').css({'background-image':`url(${imgSRC})`,'background-size':'cover','width': '1200px','height': '500px','padding':'0'});
+    
+    let textContainer = $('<div class="col-md-12 d-flex justify-content-center">').css({'background-color':'rgba(0,0,0,0.4)', 'width': '100%','height': '100%'});
+   
+    displayDummyData(textContainer);
+
+    bgContainer.append(textContainer);
+    countryInfoContainer.append(bgContainer);
+    root.append(countryInfoContainer);        
+}
+
+
+
+function displayDummyData(textContainer) {
+    var infoContainer = $('<section>');
+    infoContainer.appendTo($(textContainer));
+
+    var content = "<table id='dummy-table'>"
+    for(i=0; i<5; i++){
+        content += '<tr><td>' + 'Capital' + '</td><td>'+ countryInfo['capital'] + '</td></tr>';
+    }
+    content += "</table>"
+
+    infoContainer.append(content);
+}
     
 
 function displayCountryInfo(countryInfo) {
