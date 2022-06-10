@@ -30,3 +30,12 @@ h3 {
     height: 500px; 
     width: 900px;
 }
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+    .col-md-6 {
+        padding-bottom: 20px;
+
+    };
+
+}
