@@ -474,6 +474,7 @@ function genLandingContent(){
 // generates country content (with smaller map, flag, and facts)
 function genCountryContent(currentCountry){
     const countryInfoContainer = $('<div class="row">');
+    // generalInfoData(currentCountry);
     generalInfoData(currentCountry).then(capital => {
         console.log(capital, "capital");
         getBGImg(capital).then(srcImg => {
