@@ -17,10 +17,8 @@
 // Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 let map;
 var countryInfo = {};
-function genMap(lat, lon, zoom){
-    
-    map.setView([lat, lon], zoom);
-    
+function genMap(lat, lon, zoom){   
+    map.setView([lat, lon], zoom);   
 }
 
 function genBorders(country) {
@@ -50,7 +48,7 @@ function generalInfoData(country){
         return response.json();
     })
     .then(function (data){
-        console.log(data);
+        console.log('genInfoData');
         countryLat = data[0].latlng[0];
         countryLon = data[0].latlng[1];
         let area = data[0].area;
@@ -456,7 +454,7 @@ function genLandingContent(){
     }).addTo(map);
     genMap(0, 0, 1);  
 
-    // Event listeners ------------------------------------------------------------------------------
+    // event listeners
     $('.searchButton').on('click', function(){
         // emptyContent();
         let currentCountry = $('.searchInput').val();
@@ -470,7 +468,6 @@ function genLandingContent(){
         console.log(currentCountry);
         genCountryContent(currentCountry);
     })
-
 }
 
 
@@ -484,33 +481,10 @@ function genCountryContent(currentCountry){
             displayBackground (srcImg);
         });
     });
-
-    // $('.searchButton').on('click', function(){
-    //     // emptyContent();
-    //     let currentCountry = $('.searchInput').val();
-    //     console.log(currentCountry);
-    //     genCountryContent(currentCountry);
-    // })
-    
-    // dropdownMenuUl.on('click', 'li', function(){
-    //     // emptyContent();
-    //     let currentCountry = $(this).text();
-    //     console.log(currentCountry);
-    //     genCountryContent(currentCountry);
-    // })
-
-    // let contentMap = $('<div class="col-12 d-flex justify-content-center m-5" id="map">')
-    //         .css({"height":"500px","width":"1200px"});
-    // contentContainer.append(contentMap);
-    // root.append(contentContainer);
-    // map = L.map('map');
-    
-    // generalInfoData(currentCountry);
 }
 
 // run it -------------------------------------------
 genLandingContent();
-
 
 
 const infoContainer = $('<div class="row d-flex justify-content-center">');
@@ -647,5 +621,3 @@ function displayCountryInfo(countryInfo) {
     riskValue.appendTo(riskRow);
     riskValue.text(countryInfo['risk_score']+'/5');
 }
-
-// generalInfoData('Mexico');
