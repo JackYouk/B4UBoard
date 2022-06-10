@@ -29,6 +29,7 @@ h3 {
 #map { 
     height: 500px; 
     width: 900px;
+    z-index: -1;
 }
 
 #dummy-table {
@@ -54,10 +55,10 @@ td {
     height: 50px;
 }
 
-img {
+/* img {
     height: 50px;
     z-index: -1;
-}
+} */
 
 .force-scroll {
     overflow-y: scroll; 
@@ -72,6 +73,8 @@ img {
     width: max-content;
     list-style-type: none;
     background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 
 }
 

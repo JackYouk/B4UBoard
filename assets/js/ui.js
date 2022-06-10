@@ -1,10 +1,10 @@
 // use this js file to create our user interface- append elements to the root function in order to display to the page
 
 // Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 let map;
 var countryInfo = {};
 function genMap(lat, lon, zoom){
+    
     map.setView([lat, lon], 7);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: zoom,
@@ -54,8 +54,8 @@ function generalInfoData(country){
         }else{
             zoomLevel = 2;
         }
-        genBorders(country);      
-        // genMap(countryLat, countryLon, zoomLevel);
+        genBorders(country);    
+        genMap(countryLat, countryLon, zoomLevel);
         parseCountryInfo(data[0]);
         getRiskData(data[0].cca2);
         return data[0].capital[0];
@@ -85,7 +85,33 @@ function getRiskData(country_code){
         displayCountryInfo(countryInfo);
     })
 }
+
+function getBGImg(city){
+    var url = "https://en.wikipedia.org/w/api.php";     
+    var params = {
+        action: "query",
+        prop: "pageimages",
+        titles: city,
+        format: "json",
+        piprop: "original"
+    };
     
+    url = url + "?origin=*";
+    Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+    
+    return fetch(url)
+        .then(function(response){return response.json();})  // conversion to json/dict  
+        .then(function(response) {
+            // console.log("yes");
+            console.log(response, "resp");
+            var pages = response.query.pages;
+            
+            for (var page in pages) {         
+                console.log("1",pages[page].original.source );    
+                return pages[page].original.source;  
+            }       
+        })
+}
 
 // UI ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -406,14 +432,14 @@ function emptyContent(){
 
 // Event listeners ------------------------------------------------------------------------------
 $('.searchButton').on('click', function(){
-    emptyContent();
+    // emptyContent();
     let currentCountry = $('.searchInput').val();
     console.log(currentCountry);
     genCountryContent(currentCountry);
 })
 
 dropdownMenuUl.on('click', 'li', function(){
-    emptyContent();
+    // emptyContent();
     let currentCountry = $(this).text();
     console.log(currentCountry);
     genCountryContent(currentCountry);
@@ -421,11 +447,11 @@ dropdownMenuUl.on('click', 'li', function(){
 
 // generates landing page content (big map)
 function genLandingContent(){
-        let landingMap = $('<div class="col-12 d-flex justify-content-center m-5" id="map">')
-            .css({"height":"500px","width":"1200px"});
-    map = L.map('map');
+    let landingMap = $('<div class="col-12 d-flex justify-content-center m-5" id="map">')
+        .css({"height":"500px","width":"1200px"});
     contentContainer.append(landingMap);
     root.append(contentContainer);
+    map = L.map('map');
     genMap(0, 0, 1);  
 }
 
@@ -440,37 +466,20 @@ function genCountryContent(currentCountry){
             displayBackground (srcImg, countryInfoContainer);
         });
     });
+
+    
+    // let contentMap = $('<div class="col-12 d-flex justify-content-center m-5" id="map">')
+    //         .css({"height":"500px","width":"1200px"});
+    // contentContainer.append(contentMap);
+    // root.append(contentContainer);
+    // map = L.map('map');
+    
+    generalInfoData(currentCountry);
 }
 
 // run it -------------------------------------------
 genLandingContent();
 
-function getBGImg(city){
-    var url = "https://en.wikipedia.org/w/api.php";     
-    var params = {
-        action: "query",
-        prop: "pageimages",
-        titles: city,
-        format: "json",
-        piprop: "original"
-    };
-    
-    url = url + "?origin=*";
-    Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
-    
-    return fetch(url)
-        .then(function(response){return response.json();})  // conversion to json/dict  
-        .then(function(response) {
-            // console.log("yes");
-            console.log(response, "resp");
-            var pages = response.query.pages;
-            
-            for (var page in pages) {         
-                console.log("1",pages[page].original.source );    
-                return pages[page].original.source;  
-            }       
-        })
-}
     
 function displayBackground(imgSRC, countryInfoContainer) {
     let bgContainer = $('<div class="col-md-12 d-flex justify-content-center mt-5">').css({'background-image':`url(${imgSRC})`,'background-size':'cover','width': '1200px','height': '500px','padding':'0'});
@@ -625,4 +634,4 @@ function displayCountryInfo(countryInfo) {
     riskValue.text(countryInfo['risk_score']);
 }
 
-generalInfoData('Mexico');
+// generalInfoData('Mexico');
