@@ -96,6 +96,8 @@ function getRiskData(country_code){
     })
 }
 
+
+
 function getBGImg(city){
     var url = "https://en.wikipedia.org/w/api.php";     
     var params = {

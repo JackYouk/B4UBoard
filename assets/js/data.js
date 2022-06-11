@@ -114,6 +114,9 @@ function displayCountryInfo(countryInfo) {
 // console.log(country_data.capital[0]);
 // console.log("yes");
 
+
+// http://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=India
+
 var url = "https://en.wikipedia.org/w/api.php"; 
 
 var params = {
