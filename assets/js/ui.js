@@ -130,6 +130,10 @@ function getBGImg(city){
 const root = $('#root');
 
 
+    
+
+
+
 // Logo Header ------------------------------------------------------------------------------------------
 let logoHeader = $('<header class="row">');
 let imgContainer = $('<div class="col-12">');
