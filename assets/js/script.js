@@ -529,7 +529,7 @@ contentContainer.append(infoContainer);
 
 // Take a URL for an image as input and set it as the background to the country info section.
 function displayBackground(imgSRC) {
-    infoContainer.css({ 'background-image': `url(${imgSRC})`, 'background-size': 'cover', 'height': '750px', 'padding': '0', 'min-width': '310px' }).addClass('col-10');
+    infoContainer.css({ 'background-image': `url(${imgSRC})`, 'background-size': 'cover', 'height': '800px', 'padding': '0', 'min-width': '310px' }).addClass('col-10');
 }
 
 // Displays the given country info object and displays it in a table format.
