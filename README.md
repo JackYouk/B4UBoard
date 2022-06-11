@@ -24,12 +24,12 @@ SO THAT I can have general information that will provide me with an overview of 
 
 
 # Wireframe
-
-https://docs.google.com/presentation/d/1sM5nqNtb1D5REimq5yrNBPo2Rt5RL63ksB3lCA33VhA/edit#slide=id.g1302e28deb8_1_11
+![image](https://user-images.githubusercontent.com/102705118/173203824-19dcc6b1-7bd5-4c88-81ca-8d4b12e7733d.png)
+![image](https://user-images.githubusercontent.com/102705118/173203844-b704d22f-8933-4344-8119-5286bb6ef19c.png)
 
 
 # Screenshots of application
-Enter here
+make after deployment
 
 # List of APIs
 
