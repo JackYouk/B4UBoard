@@ -48,26 +48,33 @@ function generalInfoData(country){
         return response.json();
     })
     .then(function (data){
-        console.log('genInfoData');
-        countryLat = data[0].latlng[0];
-        countryLon = data[0].latlng[1];
-        let area = data[0].area;
-        if(area < 99000){
-            zoomLevel = 6;
-        }else if(area < 500000){
-            zoomLevel = 5;
-        }else if(area < 2500000){
-            zoomLevel = 4;
-        }else if(area < 9500000){
-            zoomLevel = 3;
+        if(data.status === 404){
+            errorModal();
+            console.log(53);
+            return;
         }else{
-            zoomLevel = 2;
-        }
-        genBorders(country);    
-        genMap(countryLat, countryLon, zoomLevel);
-        parseCountryInfo(data[0]);
-        getRiskData(data[0].cca2);
-        return data[0].capital[0];
+            console.log(data);
+            console.log('genInfoData');
+            countryLat = data[0].latlng[0];
+            countryLon = data[0].latlng[1];
+            let area = data[0].area;
+            if(area < 99000){
+                zoomLevel = 6;
+            }else if(area < 500000){
+                zoomLevel = 5;
+            }else if(area < 2500000){
+                zoomLevel = 4;
+            }else if(area < 9500000){
+                zoomLevel = 3;
+            }else{
+                zoomLevel = 2;
+            }
+            genBorders(country);    
+            genMap(countryLat, countryLon, zoomLevel);
+            parseCountryInfo(data[0]);
+            getRiskData(data[0].cca2);
+            return data[0].capital[0];
+            }
     })
 }
 
@@ -129,6 +136,17 @@ function getBGImg(city){
 //const root = $('#root');
 const root = $('#root');
 
+// error modal --------------------------------------------------------
+function errorModal(){
+    console.log(140);
+    let errorMsgDiv = $('<div class="row d-flex justify-content-center">')
+        .addClass('errorMsg')
+        .text('Error: Please enter a valid country.');
+    root.prepend(errorMsgDiv);
+    setTimeout(function(){
+        errorMsgDiv.remove();
+    }, 1000);
+}
 
     
 
@@ -463,7 +481,11 @@ function genLandingContent(){
         // emptyContent();
         let currentCountry = $('.searchInput').val();
         console.log(currentCountry);
-        genCountryContent(currentCountry);
+        if(countryList.includes(currentCountry)){
+            genCountryContent(currentCountry);
+        }else{
+            errorModal();
+        }
     })
 
     dropdownMenuUl.on('click', 'li', function(){
@@ -492,11 +514,11 @@ genLandingContent();
 
 
 const infoContainer = $('<div class="row d-flex justify-content-center">');
-root.append(infoContainer);
+contentContainer.append(infoContainer);
 
     
 function displayBackground(imgSRC) {
-    infoContainer.css({'background-image':`url(${imgSRC})`,'background-size':'cover','width': '1200px','height': '750px','padding':'0'});
+    infoContainer.css({'background-image':`url(${imgSRC})`,'background-size':'cover','height': '750px','padding':'0', 'min-width': '310px'}).addClass('col-10');
 }
 
 function displayCountryInfo(countryInfo) {
@@ -505,7 +527,7 @@ function displayCountryInfo(countryInfo) {
     countryTitle.appendTo(infoContainer);
     countryTitle.text(countryInfo['name']);
 
-    var infoTable = $('<table>').attr('id', 'data-table');
+    var infoTable = $('<table>').attr('id', 'data-table').addClass('table');
     infoTable.appendTo(infoContainer);
 
     // countryInfo['flag'] = country_data.flags.png;

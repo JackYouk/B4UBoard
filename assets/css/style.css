@@ -9,6 +9,13 @@
     margin-right: auto;
 }
 
+.errorMsg {
+    height: 50px;
+    background-color: red;
+    color: white;
+    font-size: 1.5rem;
+}
+
 h3 {
     text-align: center;
     margin-bottom: 20px;
@@ -30,6 +37,7 @@ h3 {
     height: 500px; 
     width: 900px;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -41,6 +49,8 @@ h3 {
 
 =======
     z-index: -1;
+=======
+>>>>>>> 22857c35712573f4d9f76085709621f2df3fe34e
 }
 
 #data-table {
@@ -63,7 +73,7 @@ h3 {
 }
 
 td {
-    width: 150px;
+    /* width: 150px; */
     height: 50px;
 }
 
@@ -110,5 +120,10 @@ td {
 .country-title {
     margin-top: 40px;
     color: white;
+<<<<<<< HEAD
 >>>>>>> 793d589a448c29251c30e847b7e6ded75c9eb4a2
 }
+=======
+}
+
+>>>>>>> 22857c35712573f4d9f76085709621f2df3fe34e

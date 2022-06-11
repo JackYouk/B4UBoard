@@ -29,21 +29,32 @@ https://docs.google.com/presentation/d/1sM5nqNtb1D5REimq5yrNBPo2Rt5RL63ksB3lCA33
 
 
 # Screenshots of application
-
-X
+Enter here
 
 # List of APIs
 
 1. Country Risk assessment
 https://www.travel-advisory.info/data-api
 
-2. Rest API (General info about countries)
+2. Rest Country API (General info about countries)
 https://restcountries.com/#api-endpoints-v3-all
 
-3. Exchange rates
-https://apilayer.com/marketplace/exchangerates_data-api#authentication
+3. Open Street Map
+https://openstreetmap.org
 
-4. COVID-19 travel restrictions, border control measures, and quarantine requirements.
-https://docs.joinsherpa.io/docs/travel-restrictions
+4. Wikipedia
+http://en.wikipedia.org/w/api.php
 
+
+# List of Libraries
+
+1. MDBootstrap
+
+2. Google Fonts
+
+3. Leaflet
+
+4. JQuery UI
+
+5. JQuery
 
