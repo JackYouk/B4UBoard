@@ -48,26 +48,31 @@ function generalInfoData(country){
         return response.json();
     })
     .then(function (data){
-        console.log('genInfoData');
-        countryLat = data[0].latlng[0];
-        countryLon = data[0].latlng[1];
-        let area = data[0].area;
-        if(area < 99000){
-            zoomLevel = 6;
-        }else if(area < 500000){
-            zoomLevel = 5;
-        }else if(area < 2500000){
-            zoomLevel = 4;
-        }else if(area < 9500000){
-            zoomLevel = 3;
+        if(data.status === 404){
+            
+            return;
         }else{
-            zoomLevel = 2;
-        }
-        genBorders(country);    
-        genMap(countryLat, countryLon, zoomLevel);
-        parseCountryInfo(data[0]);
-        getRiskData(data[0].cca2);
-        return data[0].capital[0];
+            console.log('genInfoData');
+            countryLat = data[0].latlng[0];
+            countryLon = data[0].latlng[1];
+            let area = data[0].area;
+            if(area < 99000){
+                zoomLevel = 6;
+            }else if(area < 500000){
+                zoomLevel = 5;
+            }else if(area < 2500000){
+                zoomLevel = 4;
+            }else if(area < 9500000){
+                zoomLevel = 3;
+            }else{
+                zoomLevel = 2;
+            }
+            genBorders(country);    
+            genMap(countryLat, countryLon, zoomLevel);
+            parseCountryInfo(data[0]);
+            getRiskData(data[0].cca2);
+            return data[0].capital[0];
+            }
     })
 }
 
@@ -488,11 +493,11 @@ genLandingContent();
 
 
 const infoContainer = $('<div class="row d-flex justify-content-center">');
-root.append(infoContainer);
+contentContainer.append(infoContainer);
 
     
 function displayBackground(imgSRC) {
-    infoContainer.css({'background-image':`url(${imgSRC})`,'background-size':'cover','height': '750px','padding':'0'}).addClass('col-10');
+    infoContainer.css({'background-image':`url(${imgSRC})`,'background-size':'cover','height': '750px','padding':'0', 'min-width': '310px'}).addClass('col-10');
 }
 
 function displayCountryInfo(countryInfo) {
