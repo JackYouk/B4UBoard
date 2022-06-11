@@ -29,12 +29,7 @@ https://docs.google.com/presentation/d/1sM5nqNtb1D5REimq5yrNBPo2Rt5RL63ksB3lCA33
 
 
 # Screenshots of application
-
-![Application Screenshot](./assets/image/Screen%20Shot%201.png)
-![Application Screenshot](./assets/image/Screen%20Shot%202.png)
-![Application Screenshot](./assets/image/Screen%20Shot%203.png)
-![Application Screenshot](./assets/image/Screen%20Shot%204.png)
-![Application Screenshot](./assets/image/Screen%20Shot%205.png)
+Enter here
 
 # List of APIs
 
