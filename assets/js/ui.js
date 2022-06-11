@@ -85,6 +85,7 @@ function parseCountryInfo(country_data) {
     countryInfo['population'] = country_data.population;
     countryInfo['continents'] = country_data.continents;
     countryInfo['area'] = country_data.area;
+    countryInfo['name'] = country_data.name.common;
 }
 
 // risk assesment
@@ -474,23 +475,12 @@ function genLandingContent(){
 // generates country content (with smaller map, flag, and facts)
 function genCountryContent(currentCountry){
     const countryInfoContainer = $('<div class="row">');
-    // generalInfoData(currentCountry);
     generalInfoData(currentCountry).then(capital => {
-        console.log(capital, "capital");
         getBGImg(capital).then(srcImg => {
-            console.log(srcImg, "yes 1");
             displayBackground (srcImg, countryInfoContainer);
         });
     });
 
-    
-    // let contentMap = $('<div class="col-12 d-flex justify-content-center m-5" id="map">')
-    //         .css({"height":"500px","width":"1200px"});
-    // contentContainer.append(contentMap);
-    // root.append(contentContainer);
-    // map = L.map('map');
-    
-    // generalInfoData(currentCountry);
 }
 
 // run it -------------------------------------------
@@ -498,18 +488,16 @@ genLandingContent();
 
     
 function displayBackground(imgSRC, countryInfoContainer) {
+    
     let bgContainer = $('<div class="col-md-12 d-flex justify-content-center mt-5">').css({'background-image':`url(${imgSRC})`,'background-size':'cover','width': '1200px','height': '500px','padding':'0'});
     
     let textContainer = $('<div class="col-md-12 d-flex justify-content-center">').css({'background-color':'rgba(0,0,0,0.4)', 'width': '100%','height': '100%'});
    
     displayDummyData(textContainer);
-
     bgContainer.append(textContainer);
     countryInfoContainer.append(bgContainer);
     root.append(countryInfoContainer);        
 }
-
-
 
 function displayDummyData(textContainer) {
     var infoContainer = $('<section>');
