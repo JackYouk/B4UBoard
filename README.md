@@ -1,7 +1,7 @@
 # B4UBoard
 ![image](https://user-images.githubusercontent.com/102705118/173204051-6f849087-b930-4887-988c-c4135d91f4f3.png)
 
-An interactive Front-End Web App, designed to make traveling safer and easier.
+A mobile-responsive, interactive Front-End Web App designed to make traveling safer and easier.
 
 ## URL of the deployed link:
 [b4uboard.online](url)
@@ -19,7 +19,8 @@ I WANT to search for specific destinations/countries
 SO THAT I can have general information that will provide me with an overview of the country.
 
 ## Screenshots of application
-make after deployment
+![image (1)](https://user-images.githubusercontent.com/102705118/173205795-b7d274fd-0354-4e46-94a3-802edfec7d02.png)
+
 
 ## APIs
 1. Country Risk assessment
