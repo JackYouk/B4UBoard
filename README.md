@@ -4,7 +4,7 @@
 An interactive Front-End Web App, designed to make traveling safer and easier.
 
 ## URL of the deployed link:
-[b4uboard.online]
+[b4uboard.online](url)
 
 ## Our Team
 * @anuvytla (Anusha V.)
