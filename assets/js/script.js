@@ -514,7 +514,7 @@ contentContainer.append(infoContainer);
 
     
 function displayBackground(imgSRC) {
-    infoContainer.css({'background-image':`url(${imgSRC})`,'background-size':'cover','height': '750px','padding':'0', 'min-width': '310px'}).addClass('col-10');
+    infoContainer.css({'background-image':`url(${imgSRC})`,'background-size':'cover','height': '800px','padding':'0', 'min-width': '310px'}).addClass('col-10');
 }
 
 function displayCountryInfo(countryInfo) {
