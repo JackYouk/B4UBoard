@@ -17,13 +17,8 @@
 // Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 let map;
 var countryInfo = {};
-function genMap(lat, lon, zoom){
-    
-    map.setView([lat, lon], 7);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: zoom,
-        attribution: '© OpenStreetMap'
-    }).addTo(map);
+function genMap(lat, lon, zoom){   
+    map.setView([lat, lon], zoom);   
 }
 
 function genBorders(country) {
@@ -53,7 +48,7 @@ function generalInfoData(country){
         return response.json();
     })
     .then(function (data){
-        console.log(data);
+        console.log('genInfoData');
         countryLat = data[0].latlng[0];
         countryLon = data[0].latlng[1];
         let area = data[0].area;
@@ -446,21 +441,6 @@ function emptyContent(){
     contentContainer.empty();
 }
 
-// Event listeners ------------------------------------------------------------------------------
-$('.searchButton').on('click', function(){
-    // emptyContent();
-    let currentCountry = $('.searchInput').val();
-    console.log(currentCountry);
-    genCountryContent(currentCountry);
-})
-
-dropdownMenuUl.on('click', 'li', function(){
-    // emptyContent();
-    let currentCountry = $(this).text();
-    console.log(currentCountry);
-    genCountryContent(currentCountry);
-})
-
 // generates landing page content (big map)
 function genLandingContent(){
     let landingMap = $('<div class="col-12 d-flex justify-content-center m-5" id="map">')
@@ -468,56 +448,59 @@ function genLandingContent(){
     contentContainer.append(landingMap);
     root.append(contentContainer);
     map = L.map('map');
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
     genMap(0, 0, 1);  
+
+    // event listeners
+    $('.searchButton').on('click', function(){
+        // emptyContent();
+        let currentCountry = $('.searchInput').val();
+        console.log(currentCountry);
+        genCountryContent(currentCountry);
+    })
+
+    dropdownMenuUl.on('click', 'li', function(){
+        // emptyContent();
+        let currentCountry = $(this).text();
+        console.log(currentCountry);
+        genCountryContent(currentCountry);
+    })
 }
 
 
 // generates country content (with smaller map, flag, and facts)
 function genCountryContent(currentCountry){
-    const countryInfoContainer = $('<div class="row">');
+    infoContainer.empty();
     generalInfoData(currentCountry).then(capital => {
         getBGImg(capital).then(srcImg => {
-            displayBackground (srcImg, countryInfoContainer);
+            console.log(srcImg, "yes 1");
+            displayBackground (srcImg);
         });
     });
-
 }
 
 // run it -------------------------------------------
 genLandingContent();
 
+
+const infoContainer = $('<div class="row d-flex justify-content-center">');
+root.append(infoContainer);
+
     
-function displayBackground(imgSRC, countryInfoContainer) {
-    
-    let bgContainer = $('<div class="col-md-12 d-flex justify-content-center mt-5">').css({'background-image':`url(${imgSRC})`,'background-size':'cover','width': '1200px','height': '500px','padding':'0'});
-    
-    let textContainer = $('<div class="col-md-12 d-flex justify-content-center">').css({'background-color':'rgba(0,0,0,0.4)', 'width': '100%','height': '100%'});
-   
-    displayDummyData(textContainer);
-    bgContainer.append(textContainer);
-    countryInfoContainer.append(bgContainer);
-    root.append(countryInfoContainer);        
+function displayBackground(imgSRC) {
+    infoContainer.css({'background-image':`url(${imgSRC})`,'background-size':'cover','width': '1200px','height': '750px','padding':'0'});
 }
-
-function displayDummyData(textContainer) {
-    var infoContainer = $('<section>');
-    infoContainer.appendTo($(textContainer));
-
-    var content = "<table id='dummy-table'>"
-    for(i=0; i<5; i++){
-        content += '<tr><td>' + 'Capital' + '</td><td>'+ countryInfo['capital'] + '</td></tr>';
-    }
-    content += "</table>"
-
-    infoContainer.append(content);
-}
-    
 
 function displayCountryInfo(countryInfo) {
-    var infoContainer = $('<section>');
-    infoContainer.appendTo($('#root'));
+    
+    var countryTitle = $('<h3>').addClass('country-title');
+    countryTitle.appendTo(infoContainer);
+    countryTitle.text(countryInfo['name']);
 
-    var infoTable = $('<table>');
+    var infoTable = $('<table>').attr('id', 'data-table');
     infoTable.appendTo(infoContainer);
 
     // countryInfo['flag'] = country_data.flags.png;
@@ -528,7 +511,7 @@ function displayCountryInfo(countryInfo) {
     flagTitle.appendTo(flagRow);
     var flagImageCol = $('<td>');
     flagImageCol.appendTo(flagRow);
-    var flagImage = $('<img>');
+    var flagImage = $('<img>').addClass('content-img');
     flagImage.attr('src', countryInfo['flag']);
     flagImage.appendTo(flagImageCol);
 
@@ -541,7 +524,7 @@ function displayCountryInfo(countryInfo) {
     coatOfAarmsTitle.appendTo(coatOfAarmsRow);
     var coatOfArmsImageCol = $('<td>');
     coatOfArmsImageCol.appendTo(coatOfAarmsRow);
-    var coatOfAarmsImage = $('<img>');
+    var coatOfAarmsImage = $('<img>').addClass('content-img');
     coatOfAarmsImage.attr('src' , countryInfo['coat_of_arms']);
     coatOfAarmsImage.appendTo(coatOfArmsImageCol);
     
@@ -594,7 +577,7 @@ function displayCountryInfo(countryInfo) {
     var populationRow = $('<tr>');
     populationRow.appendTo(infoTable);
     var populationTitle = $('<td>');
-    populationTitle.text('Capital: ');
+    populationTitle.text('Population: ');
     populationTitle.appendTo(populationRow);
     var populationValue = $('<td>');
     populationValue.appendTo(populationRow);
@@ -604,7 +587,7 @@ function displayCountryInfo(countryInfo) {
     var continentsRow = $('<tr>');
     continentsRow.appendTo(infoTable);
     var continentTitle = $('<td>');
-    continentTitle.text('Continents: ');
+    continentTitle.text('Continent: ');
     continentTitle.appendTo(continentsRow);
     var continentValue = $('<td>');
     continentValue.appendTo(continentsRow);
@@ -625,7 +608,7 @@ function displayCountryInfo(countryInfo) {
     areaTitle.appendTo(areaRow);
     var areaValue = $('<td>');
     areaValue.appendTo(areaRow);
-    areaValue.text(countryInfo['area']);
+    areaValue.text(countryInfo['area']+' sqft');
 
     //countryInfo['risk_score'] = data.data[country_code].advisory.score;
     var riskRow = $('<tr>');
@@ -635,7 +618,5 @@ function displayCountryInfo(countryInfo) {
     riskTitle.appendTo(riskRow);
     var riskValue = $('<td>');
     riskValue.appendTo(riskRow);
-    riskValue.text(countryInfo['risk_score']);
+    riskValue.text(countryInfo['risk_score']+'/5');
 }
-
-// generalInfoData('Mexico');
