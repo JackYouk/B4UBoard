@@ -492,7 +492,7 @@ root.append(infoContainer);
 
     
 function displayBackground(imgSRC) {
-    infoContainer.css({'background-image':`url(${imgSRC})`,'background-size':'cover','width': '1200px','height': '750px','padding':'0'});
+    infoContainer.css({'background-image':`url(${imgSRC})`,'background-size':'cover','height': '750px','padding':'0'}).addClass('col-10');
 }
 
 function displayCountryInfo(countryInfo) {
@@ -501,7 +501,7 @@ function displayCountryInfo(countryInfo) {
     countryTitle.appendTo(infoContainer);
     countryTitle.text(countryInfo['name']);
 
-    var infoTable = $('<table>').attr('id', 'data-table');
+    var infoTable = $('<table>').attr('id', 'data-table').addClass('table');
     infoTable.appendTo(infoContainer);
 
     // countryInfo['flag'] = country_data.flags.png;
