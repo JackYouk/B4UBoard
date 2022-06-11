@@ -49,9 +49,11 @@ function generalInfoData(country){
     })
     .then(function (data){
         if(data.status === 404){
-            
+            errorModal();
+            console.log(53);
             return;
         }else{
+            console.log(data);
             console.log('genInfoData');
             countryLat = data[0].latlng[0];
             countryLon = data[0].latlng[1];
@@ -134,6 +136,17 @@ function getBGImg(city){
 //const root = $('#root');
 const root = $('#root');
 
+// error modal --------------------------------------------------------
+function errorModal(){
+    console.log(140);
+    let errorMsgDiv = $('<div class="row d-flex justify-content-center">')
+        .addClass('errorMsg')
+        .text('Error: Please enter a valid country.');
+    root.prepend(errorMsgDiv);
+    setTimeout(function(){
+        errorMsgDiv.remove();
+    }, 1000);
+}
 
 // Logo Header ------------------------------------------------------------------------------------------
 let logoHeader = $('<header class="row">');
@@ -464,7 +477,11 @@ function genLandingContent(){
         // emptyContent();
         let currentCountry = $('.searchInput').val();
         console.log(currentCountry);
-        genCountryContent(currentCountry);
+        if(countryList.includes(currentCountry)){
+            genCountryContent(currentCountry);
+        }else{
+            errorModal();
+        }
     })
 
     dropdownMenuUl.on('click', 'li', function(){
