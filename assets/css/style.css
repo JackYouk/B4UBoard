@@ -43,18 +43,19 @@ h3 {
     z-index: -1;
 }
 
-#dummy-table {
+#data-table {
     border-collapse: collapse;
     table-layout: fixed;
     text-align: center;
     border: 2px solid;
     width: 80%; 
-    margin: 10%;
+    margin-bottom: 10%;
     color: white;
     font-weight: bolder;
+    background-color: rgba(0,0,0,0.6)
 }
 
-#dummy-table td { 
+#data-table td { 
     width: 100%;
     padding: 10px;
     font-size: 1.3rem;
@@ -97,5 +98,17 @@ td {
 
 .ui-helper-hidden-accessible {
     display: none;
+<<<<<<< HEAD
 >>>>>>> f6a2ecc773e6b81d9c98f31b5c8ff4474e0f10c1
+=======
+}
+
+.content-img {
+    height: 50px;
+}
+
+.country-title {
+    margin-top: 40px;
+    color: white;
+>>>>>>> 793d589a448c29251c30e847b7e6ded75c9eb4a2
 }
