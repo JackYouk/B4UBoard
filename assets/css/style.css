@@ -9,12 +9,7 @@
     margin-right: auto;
 }
 
-.errorMsg {
-    height: 50px;
-    background-color: red;
-    color: white;
-    font-size: 1.5rem;
-}
+
 
 h3 {
     text-align: center;
@@ -36,22 +31,10 @@ h3 {
 #map { 
     height: 500px; 
     width: 900px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) { 
-    .col-md-6 {
-        padding-bottom: 20px;
-
-    };
-
-=======
     z-index: -1;
-=======
->>>>>>> 22857c35712573f4d9f76085709621f2df3fe34e
+
 }
+
 
 #data-table {
     border-collapse: collapse;
@@ -99,7 +82,6 @@ td {
     border-bottom-right-radius: 10px;
 
 }
-
 .ui-menu-item:hover {
     background-color: var(--mdb-blue);
     color: white;
@@ -108,9 +90,7 @@ td {
 
 .ui-helper-hidden-accessible {
     display: none;
-<<<<<<< HEAD
->>>>>>> f6a2ecc773e6b81d9c98f31b5c8ff4474e0f10c1
-=======
+
 }
 
 .content-img {
@@ -120,10 +100,4 @@ td {
 .country-title {
     margin-top: 40px;
     color: white;
-<<<<<<< HEAD
->>>>>>> 793d589a448c29251c30e847b7e6ded75c9eb4a2
 }
-=======
-}
-
->>>>>>> 22857c35712573f4d9f76085709621f2df3fe34e

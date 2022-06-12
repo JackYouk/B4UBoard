@@ -37,7 +37,6 @@ function genBorders(country) {
       });
   }
 
-
 // rest api - general info
 let countryLat = 0;
 let countryLon = 0;
@@ -48,10 +47,8 @@ function generalInfoData(country){
         return response.json();
     })
     .then(function (data){
-        if(data.status === 404){
-            errorModal();
-            console.log(53);
-            return;
+        if(data.status === 404){        
+            errorModal();  
         }else{
             console.log(data);
             console.log('genInfoData');
@@ -77,6 +74,7 @@ function generalInfoData(country){
             }
     })
 }
+
 
 function parseCountryInfo(country_data) {
     countryInfo['flag'] = country_data.flags.png;
@@ -136,19 +134,12 @@ function getBGImg(city){
 //const root = $('#root');
 const root = $('#root');
 
-// error modal --------------------------------------------------------
-function errorModal(){
-    console.log(140);
-    let errorMsgDiv = $('<div class="row d-flex justify-content-center">')
-        .addClass('errorMsg')
-        .text('Error: Please enter a valid country.');
-    root.prepend(errorMsgDiv);
-    setTimeout(function(){
-        errorMsgDiv.remove();
-    }, 1000);
-}
 
+function errorModal() {
+    var myModalEl = $('#invalidSearchModal');
+    $(myModalEl).modal('show');
     
+}
 
 
 
