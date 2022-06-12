@@ -134,13 +134,12 @@ function getBGImg(city){
 //const root = $('#root');
 const root = $('#root');
 
-
+// create function to search box exception handling
 function errorModal() {
     var myModalEl = $('#invalidSearchModal');
     $(myModalEl).modal('show');
     
 }
-
 
 
 // Logo Header ------------------------------------------------------------------------------------------
@@ -626,7 +625,7 @@ function displayCountryInfo(countryInfo) {
     areaTitle.appendTo(areaRow);
     var areaValue = $('<td>');
     areaValue.appendTo(areaRow);
-    areaValue.text(countryInfo['area']+' sqft');
+    areaValue.text(countryInfo['area']+' sq.km');
 
     //countryInfo['risk_score'] = data.data[country_code].advisory.score;
     var riskRow = $('<tr>');
