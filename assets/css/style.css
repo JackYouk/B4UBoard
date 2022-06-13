@@ -9,12 +9,7 @@
     margin-right: auto;
 }
 
-.errorMsg {
-    height: 50px;
-    background-color: red;
-    color: white;
-    font-size: 1.5rem;
-}
+
 
 h3 {
     text-align: center;
@@ -38,6 +33,7 @@ h3 {
     width: 900px;
     z-index: -1;
 }
+
 
 #data-table {
     border-collapse: collapse;
@@ -85,7 +81,6 @@ td {
     border-bottom-right-radius: 10px;
 
 }
-
 .ui-menu-item:hover {
     background-color: var(--mdb-blue);
     color: white;
@@ -94,6 +89,7 @@ td {
 
 .ui-helper-hidden-accessible {
     display: none;
+
 }
 
 .content-img {
@@ -104,4 +100,3 @@ td {
     margin-top: 40px;
     color: white;
 }
-

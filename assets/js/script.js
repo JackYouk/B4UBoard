@@ -18,6 +18,7 @@ function getCountryBorders(country) {
     // Fetch the boundary coordinates using OpenStreetMap API.
     fetch(`https://nominatim.openstreetmap.org/search?country=
       ${country}&polygon_geojson=1&format=json`)
+
         .then(function (response) {
             return response.json()
         }).then(function (data) {
@@ -141,18 +142,12 @@ function getBGImg(city) {
 // root element of the DOM - connects our js to html file - append the outside-most element containers to this function ---------------
 const root = $('#root');
 
-// error modal --------------------------------------------------------
-// Shows an error at the top of the page.
+// create function to search box exception handling
 function errorModal() {
-    console.log(140);
-    let errorMsgDiv = $('<div class="row d-flex justify-content-center">')
-        .addClass('errorMsg')
-        .text('Error: Please enter a valid country.');
-    root.prepend(errorMsgDiv);
-    setTimeout(function () {
-        errorMsgDiv.remove();
-    }, 1000);
+    var myModalEl = $('#invalidSearchModal');
+    $(myModalEl).modal('show');
 }
+
 
 // Logo Header ------------------------------------------------------------------------------------------
 // Create a div with an img tag to display the brand logo and append it to the root.
