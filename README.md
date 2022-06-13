@@ -4,7 +4,7 @@
 A mobile-responsive, interactive Front-End Web App designed to make traveling safer and easier.
 
 ## URL of the deployed link:
-https://b4uboard.online
+b4uboard.online or https://jackyouk.github.io/B4UBoard/
 
 ## Our Team
 * @anuvytla (Anusha V.)
