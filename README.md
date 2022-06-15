@@ -14,9 +14,7 @@ b4uboard.online or https://jackyouk.github.io/B4UBoard/
 * @rmdn321 (Devi R.)
 
 ## User Story
-AS A user planning my next trip
-I WANT to search for specific destinations/countries
-SO THAT I can have general information that will provide me with an overview of the country.
+AS a user planning my next trip I WANT to search for specific destinations/countries SO THAT I can have general and safety information that will assist me in planning my next trip.
 
 ## Screenshots of application
 ![image (1)](https://user-images.githubusercontent.com/102705118/173205795-b7d274fd-0354-4e46-94a3-802edfec7d02.png)
